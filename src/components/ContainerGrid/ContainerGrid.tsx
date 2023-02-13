@@ -2,20 +2,19 @@ import React, { FC } from "react";
 import { useState } from "react";
 import { useDrop } from 'react-dnd'
 import './ContainerGrid.css';
+import { factoryComponentGridView, ACCEPT_TYPE_DRAG } from '../GirdService';
 
 import { useAppSelector, useAppDispatch } from '../../hooks'
-
 import { addComponent } from '../../store/'
 
-const TypeDivGrid = "DivGrid";
+
 
 const ContainerGrid: FC = () => {
   const [items, setItems] = useState([]);
-  const gridStoreSelect = useAppSelector((state) => state.grid)
   const dispatch = useAppDispatch()
 
   const [{ canDrop, isOver, result }, drop] = useDrop(() => ({
-    accept: TypeDivGrid,
+    accept: ACCEPT_TYPE_DRAG,
     drop: (item) => item,
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -38,10 +37,10 @@ const ContainerGrid: FC = () => {
   };
 
   const handleDropAddItem = (item: any) => {
-
+    item.index = items.length;
     setItems(arr => [...arr, item]);
     console.log(`list of items: ${items.length} : item: ${JSON.stringify(item.props)}`);
-    dispatch(addComponent(item));
+    dispatch(addComponent(factoryComponentGridView(item)));
   }
 
   const handleDropAddSort = (item: any) => {
@@ -50,9 +49,6 @@ const ContainerGrid: FC = () => {
 
   }
 
-
-
-  console.log(gridStoreSelect);
 
   return (
     <div className="container-grid" ref={drop} onDrop={() => handleDrop(result)} >
@@ -64,7 +60,8 @@ const ContainerGrid: FC = () => {
             return (
               <>
                 <span key={index} >
-                  <item.ComponentName key={index} {...item.props} />
+
+                  <item.ComponentName key={index}  {...item.props} index={item.index} />
                 </span>
                 <br />
               </>

@@ -3,9 +3,9 @@ import React from 'react'
 import { RootState } from '../store';
 
 interface gridComponent {
-  'ComponentName': React.FC;
+  ComponentName: React.FC;
   index: number;
-  'props': object;
+  props: object;
 }
 
 // Define a type for the slice state
@@ -30,10 +30,19 @@ export const GridSlice = createSlice({
     removeComponent: (state, action: PayloadAction<gridComponent>) => {
       console.log(state, action.payload.index, 'need to remove');
     },
+    updateComponent: (state, action: PayloadAction<{ index: number, props: object }>) => {
+      // console.log(state, action);
+      state.gird.map((component: gridComponent) => {
+        console.log(`update setting by index , ${JSON.stringify(component)}`);
+        if (component.index === action.payload.index) {
+          component.props = action.payload.props;
+        }
+      })
+    },
   },
 })
 
-export const { addComponent, removeComponent } = GridSlice.actions
+export const { addComponent, removeComponent, updateComponent } = GridSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectGrid = (state: RootState) => state.grid;

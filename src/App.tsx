@@ -1,14 +1,12 @@
 import React from "react";
-import { DivGrid } from "./components/DivGrid/DivGrid";
+
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 import { ContainerGrid } from './components/ContainerGrid/ContainerGrid';
+import { ContainerGridView } from "./components/ContainerGridView/ContainerGridView";
+import { getComponentsList } from "./components/GirdService";
 
-const config = [
-  { 'ComponentName': DivGrid, 'props': { 'message': 'hello divGrid' } },
-  { 'ComponentName': DivGrid, 'props': { 'message': 'hiiiii' } },
-  { 'ComponentName': DivGrid, 'props': { 'message': 'start know React' } },
-];
+const config = getComponentsList();
 
 const App: React.FC = () => {
   return (
@@ -16,13 +14,12 @@ const App: React.FC = () => {
       <h1> Build Grid </h1>
       <DndProvider backend={HTML5Backend}>
         {config.map((Component, index) => {
-          console.log(Component);
-
           return <Component.ComponentName {...Component.props} key={index} />;
         })}
 
         <div style={{ overflow: 'hidden', clear: 'both' }}>
           <ContainerGrid />
+          <ContainerGridView />
         </div>
       </DndProvider>
 

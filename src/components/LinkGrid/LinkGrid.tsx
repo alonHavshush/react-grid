@@ -1,30 +1,28 @@
 import React from "react";
 import { useDrag } from 'react-dnd';
-import { DivGridSetting } from "./DivGridSetting";
+import { LinkGridSetting } from "./LinkGridSetting";
 import { ACCEPT_TYPE_DRAG } from "../GirdService";
-import './DivGrid.css'
 
-interface DivGridProps {
+interface LinkGridProps {
   index?: number;
-  message: string
+  link: string
 }
 
 
+const LinkGrid: React.FC<LinkGridProps> = ({ link, index }) => {
 
-const DivGrid: React.FC<DivGridProps> = ({ message, index }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ACCEPT_TYPE_DRAG,
     canDrag: index === undefined,
-    item: { 'ComponentName': DivGridSetting, index, 'props': { 'message': message, 'isDragged': false } },
+    item: { 'ComponentName': LinkGridSetting, index, 'props': { 'link': link, 'isDragged': false } },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     })
   }))
 
-
   return (
     <div
-      className="div-grid"
+      className="link-grid"
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1,
@@ -32,12 +30,11 @@ const DivGrid: React.FC<DivGridProps> = ({ message, index }) => {
         fontWeight: 'bold',
         cursor: 'move',
       }}
-    > {message} </div>
-  );
-
+    > {link} </div>
+  )
 }
 
 
 export {
-  DivGrid
+  LinkGrid
 }
