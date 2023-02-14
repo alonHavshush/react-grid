@@ -4,8 +4,10 @@ import { useDrop } from 'react-dnd'
 import './ContainerGrid.css';
 import { factoryComponentGridView, ACCEPT_TYPE_DRAG } from '../GirdService';
 
+
 import { useAppSelector, useAppDispatch } from '../../hooks'
 import { addComponent } from '../../store/'
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 
 
@@ -38,9 +40,14 @@ const ContainerGrid: FC = () => {
 
   const handleDropAddItem = (item: any) => {
     item.index = items.length;
-    setItems(arr => [...arr, item]);
-    console.log(`list of items: ${items.length} : item: ${JSON.stringify(item.props)}`);
-    dispatch(addComponent(factoryComponentGridView(item)));
+    const viewComponent = factoryComponentGridView(item);
+    if (viewComponent.ComponentName) {
+      setItems(arr => [...arr, item]);
+      console.log(`list of items: ${items.length} : item: ${JSON.stringify(item.props)}`);
+      dispatch(addComponent(viewComponent));
+    } else {
+      throw Error('miss definition in factoryComponentGridView ')
+    }
   }
 
   const handleDropAddSort = (item: any) => {
@@ -51,25 +58,20 @@ const ContainerGrid: FC = () => {
 
 
   return (
-    <div className="container-grid" ref={drop} onDrop={() => handleDrop(result)} >
-      {isActive ? 'Release to drop' : 'Drag a box here'}
-
-      <div className="items" >
-        {
-          items.map((item, index) => {
-            return (
-              <>
-                <span key={index} >
-
-                  <item.ComponentName key={index}  {...item.props} index={item.index} />
-                </span>
-                <br />
-              </>
-            )
-          })
-        }
-      </div >
-    </div >
+    <Grid container p={3} alignContent={"flex-start"} className="container-grid" ref={drop} onDrop={() => handleDrop(result)} >
+      {items.length === 0 ? 'Drag a box here' : ''}
+      {
+        items.map((item, index) => {
+          return (
+            <>
+              <Grid xs={12} key={index} p={1} >
+                <item.ComponentName key={index}  {...item.props} index={item.index} />
+              </Grid>
+            </>
+          )
+        })
+      }
+    </Grid >
   )
 }
 

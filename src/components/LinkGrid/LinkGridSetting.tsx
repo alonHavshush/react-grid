@@ -1,17 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch } from '../../hooks'
 import { updateComponent } from '../../store/'
+import { LinkGridProps } from "../../interfaces/gridInterface";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Card } from "@mui/material";
+import TextField from '@mui/material/TextField';
 
 
-interface LinkGridSettingProps {
-  index: number;
-  link: string;
-}
-
-
-const LinkGridSetting: React.FC<LinkGridSettingProps> = (props) => {
+const LinkGridSetting: React.FC<LinkGridProps> = (props) => {
   const dispatch = useAppDispatch();
-  const [linkGridSettingItem, setLinkGridSettingItem] = useState<LinkGridSettingProps>({ ...props });
+  const [linkGridSettingItem, setLinkGridSettingItem] = useState<LinkGridProps>({ ...props });
   const [title, setTitle] = useState('insert title');
 
   useEffect(() => {
@@ -29,10 +27,16 @@ const LinkGridSetting: React.FC<LinkGridSettingProps> = (props) => {
 
 
   return (
-    <div>
-      <input type="text" defaultValue={linkGridSettingItem.link} onChange={handleChangeMessage} />
-      <input type="text" defaultValue={title} onChange={(e) => { setTitle(e.target.value) }} />
-    </div>
+    <Grid >
+      <Card>
+        <Grid >
+        </Grid>
+        <TextField variant="standard" fullWidth={true} defaultValue={linkGridSettingItem.link} onChange={handleChangeMessage} />
+        <Grid>
+          <TextField variant="standard" fullWidth={true} defaultValue={title} onChange={(e) => { setTitle(e.target.value) }} />
+        </Grid>
+      </Card>
+    </Grid>
   )
 }
 

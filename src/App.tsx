@@ -5,22 +5,42 @@ import { DndProvider } from 'react-dnd'
 import { ContainerGrid } from './components/ContainerGrid/ContainerGrid';
 import { ContainerGridView } from "./components/ContainerGridView/ContainerGridView";
 import { getComponentsList } from "./components/GirdService";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Grid from '@mui/material/Unstable_Grid2';
 
+import './App.css';
 const config = getComponentsList();
 
 const App: React.FC = () => {
   return (
     <>
-      <h1> Build Grid </h1>
+      <h1>  Grid Builder  </h1>
       <DndProvider backend={HTML5Backend}>
-        {config.map((Component, index) => {
-          return <Component.ComponentName {...Component.props} key={index} />;
-        })}
+        <Grid container spacing={2} className="components-list">
+          {config.map((Component, index) => {
 
-        <div style={{ overflow: 'hidden', clear: 'both' }}>
-          <ContainerGrid />
-          <ContainerGridView />
-        </div>
+            return (
+              <>
+                <Grid>
+                  <Card >
+                    <CardActions>
+                      <Component.ComponentName {...Component.props} key={index} />
+                    </CardActions>
+                  </Card>
+                </Grid>
+              </>
+            )
+          })}
+        </Grid>
+        <Grid container xs={12} >
+          <Grid xs={6} p={1} >
+            <ContainerGrid />
+          </Grid>
+          <Grid xs={6} p={1} >
+            <ContainerGridView />
+          </Grid>
+        </Grid>
       </DndProvider>
 
     </>

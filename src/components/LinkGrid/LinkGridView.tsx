@@ -1,15 +1,8 @@
 import React from "react";
+import { LinkGridProps } from "../../interfaces/gridInterface";
 
 
-interface LinkGridViewProps {
-  index: number;
-  link: string;
-  title: string;
-}
-
-
-
-const LinkGridView: React.FC<LinkGridViewProps> = ({ link, title, index }) => {
+const LinkGridView: React.FC<LinkGridProps> = ({ link, title, index }) => {
 
   return (
     <div>

@@ -1,6 +1,5 @@
 .container-view {
-  width: 45%;
-  min-height: 300px;
-  border: 1px solid black;
-  float: right;
+  background: white;
+  padding: 10px;
+  min-height: 320px;
 }

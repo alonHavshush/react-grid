@@ -1,10 +1,8 @@
 import React, { FC } from "react";
-interface DivGridViewProps {
-  index: number;
-  message: string;
-}
+import { DivGridProps } from '../../interfaces/gridInterface';
 
-const DivGridView: FC<DivGridViewProps> = ({ message }) => {
+
+const DivGridView: FC<DivGridProps> = ({ message }) => {
 
   return (
     <div className="div-grid-view">

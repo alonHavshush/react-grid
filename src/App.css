@@ -1,0 +1,19 @@
+body{
+  background-color: rgb(231, 235, 240)
+}
+
+.components-list{
+  display: flex;
+  padding: 10px;
+}
+
+.components-list > div{
+  margin-right: 10px;
+  max-width: 350px;
+  min-width: 350px;
+}
+
+.textarea-setting{
+  border: none;
+  width: 100%;
+}

@@ -2,12 +2,9 @@ import React from "react";
 import { useDrag } from 'react-dnd';
 import { LinkGridSetting } from "./LinkGridSetting";
 import { ACCEPT_TYPE_DRAG } from "../GirdService";
-
-interface LinkGridProps {
-  index?: number;
-  link: string
-}
-
+import { LinkGridProps } from "../../interfaces/gridInterface";
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const LinkGrid: React.FC<LinkGridProps> = ({ link, index }) => {
 
@@ -21,16 +18,26 @@ const LinkGrid: React.FC<LinkGridProps> = ({ link, index }) => {
   }))
 
   return (
-    <div
-      className="link-grid"
-      ref={drag}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: 'bold',
-        cursor: 'move',
-      }}
-    > {link} </div>
+    <Grid container direction='row' justifyContent='center' alignItems='center' xs={12}>
+      <Grid xs={6}>
+        <div
+          className="link-grid"
+          ref={drag}
+          style={{
+            opacity: isDragging ? 0.5 : 1,
+            fontSize: 25,
+            fontWeight: 'bold',
+            cursor: 'move',
+          }}
+        >
+
+          <Typography>
+            create link
+          </Typography>
+
+        </div >
+      </Grid>
+    </Grid >
   )
 }
 
