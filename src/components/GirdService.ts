@@ -18,15 +18,11 @@ const factoryComponentGridView = (component: gridComponent) => {
 
   switch (component.ComponentName) {
     case DivGridSetting:
-      console.log(`enter to factory func: ${component.ComponentName.name}`);
       return createComponentStructure(DivGridView, component.index, component.props);
-      break;
     case LinkGridSetting:
       return createComponentStructure(LinkGridView, component.index, component.props);
-      break;
     case ParagraphGridSetting:
       return createComponentStructure(ParagraphGridView, component.index, component.props);
-      break;
     default:
       return createComponentStructure(null, undefined, {});
 

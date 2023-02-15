@@ -1,9 +1,8 @@
-import React, { useState, ChangeEvent, FC, useEffect, ChangeEventHandler } from "react";
+import React, { useState, ChangeEvent, FC, useEffect } from "react";
 import { useAppDispatch } from '../../hooks';
 import { updateComponent } from '../../store/';
 import { DivGridProps } from '../../interfaces/gridInterface';
 import Grid from '@mui/material/Unstable_Grid2';
-import TextField from '@mui/material/TextField';
 import { Card } from "@mui/material";
 import { TextareaAutosize } from '@mui/base';
 
@@ -12,7 +11,6 @@ const DivGridSetting: FC<DivGridProps> = (props, index) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(divGridSettingItem, 'change state');
     dispatch(updateComponent({ index: divGridSettingItem.index, props: { message: divGridSettingItem.message } }));
   }, [divGridSettingItem, dispatch]);
 

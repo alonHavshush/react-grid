@@ -7,24 +7,24 @@ import './ContainerGridView.css';
 const ContainerGridView: FC = () => {
   const gridSelector = useAppSelector((state) => state.grid);
 
-  console.log(gridSelector);
+
+  if (gridSelector.gird.length === 0) {
+    return <div>empty view</div>;
+  }
+
   return (
     <div className="container-view">
       <Grid container xs={12} alignContent={"flex-start"} >
         {
-          gridSelector.gird.length > 0 ?
-            (
-              gridSelector.gird.map((item: gridComponent) => {
-                return (
-                  <>
-                    <Grid xs={12} m={1} >
-                      <item.ComponentName  {...item.props} />
-                    </Grid>
-                  </>
-                )
-              })
-            ) :
-            ('empty view')
+
+          gridSelector.gird.map((item: gridComponent, index) => {
+            return (
+              <Grid xs={12} m={1} key={index} >
+                <item.ComponentName  {...item.props} />
+              </Grid>
+            )
+          })
+
         }
 
       </Grid>

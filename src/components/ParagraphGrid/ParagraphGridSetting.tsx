@@ -11,9 +11,8 @@ const ParagraphGridSetting: React.FC<ParagraphGridProps> = (props) => {
   const [title, setTitle] = useState('set title');
 
   useEffect(() => {
-    console.log(paragraph, 'change state');
     dispatch(updateComponent({ index: props.index, props: { paragraph, title } }));
-  }, [paragraph, title, dispatch]);
+  }, [paragraph, title, props, dispatch]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;

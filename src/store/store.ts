@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './counterSlice'
 import GridSlice from './storeGrid/storeGrid'
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
     grid: GridSlice
   },
   middleware: (getDefaultMiddleware) =>

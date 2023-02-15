@@ -19,17 +19,14 @@ const App: React.FC = () => {
       <DndProvider backend={HTML5Backend}>
         <Grid container spacing={2} className="components-list">
           {config.map((Component, index) => {
-
             return (
-              <>
-                <Grid>
-                  <Card >
-                    <CardActions>
-                      <Component.ComponentName {...Component.props} key={index} />
-                    </CardActions>
-                  </Card>
-                </Grid>
-              </>
+              <Grid key={`${Component.ComponentName.name}-${index}`}>
+                <Card >
+                  <CardActions>
+                    <Component.ComponentName {...Component.props} />
+                  </CardActions>
+                </Card>
+              </Grid>
             )
           })}
         </Grid>

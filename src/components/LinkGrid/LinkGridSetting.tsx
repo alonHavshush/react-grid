@@ -13,7 +13,6 @@ const LinkGridSetting: React.FC<LinkGridProps> = (props) => {
   const [title, setTitle] = useState('insert title');
 
   useEffect(() => {
-    console.log(linkGridSettingItem, 'change state');
     dispatch(updateComponent({ index: linkGridSettingItem.index, props: { ...linkGridSettingItem, title } }));
   }, [linkGridSettingItem, title, dispatch]);
 
